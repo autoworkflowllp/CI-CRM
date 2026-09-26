@@ -4,7 +4,7 @@ let TOKEN = localStorage.getItem('ci_token') || '';
 let USER = JSON.parse(localStorage.getItem('ci_user') || 'null');
 let _cb=0;
 function api(action,data,ok,fail){
-  if(!API || API.includes('PASTE_YOUR_DEPLOYMENT_ID')){toast('Set GAS Web App URL in gas-api.js');return;}
+  if(!API || API.includes('https://script.google.com/macros/s/AKfycby51tC_lZ8vFN9kgNSibllTaRC1frMYMVtUGv9pcnNMJL_3gcJTYAd_pcuMUc6FAV2nxA/exec')){toast('Set GAS Web App URL in gas-api.js');return;}
   const cb='_gcb'+(++_cb), script=document.createElement('script');
   const timer=setTimeout(()=>{cleanup();fail&&fail({error:'Request timed out'});},20000);
   function cleanup(){clearTimeout(timer);try{delete window[cb]}catch(e){};script.remove();}
