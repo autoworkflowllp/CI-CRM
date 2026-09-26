@@ -1,6 +1,6 @@
 /* Chaitanya Impex CRM - GAS JSONP API client */
 
-const API = 'https://script.google.com/macros/s/AKfycby51tC_lZ8vFN9kgNSibllTaRC1frMYMVtUGv9pcnNMJL_3gcJTYAd_pcuMUc6FAV2nxA/exec';
+const API = 'https://script.google.com/macros/s/AKfycbxqZpU0H-NP-pF7YUz1JMeBbGrwFnDpHk_vvV5b-XyTzH7DPAJ6YJyBU60BDxN9X8G7Hw/exec';
 
 let TOKEN = localStorage.getItem('ci_token') || '';
 let USER = JSON.parse(localStorage.getItem('ci_user') || 'null');
