@@ -455,15 +455,14 @@ function getWebsiteName(id) { const w = getWebsiteById(id); return w ? w.Website
    ============================================================ */
 
 function showLogin() {
-  $('#loginView').classList.remove('hidden');
-  $('#app').classList.add('hidden'); 
+  const lv = $('#loginView'); if (lv) lv.classList.remove('hidden');
+  const av = $('#appView');   if (av) av.classList.add('hidden');
   const pw = $('#loginPassword'); if (pw) pw.value = '';
-  const em = $('#loginEmail'); if (em && APP.user) em.value = APP.user.email || '';
 }
 
 function showApp() {
-  $('#loginView').classList.add('hidden');
-  $('#app').classList.remove('hidden');
+  const lv = $('#loginView'); if (lv) lv.classList.add('hidden');
+  const av = $('#appView');   if (av) av.classList.remove('hidden');
   updateUserUI();
   buildNav();
   updateTopbar();
