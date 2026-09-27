@@ -456,14 +456,14 @@ function getWebsiteName(id) { const w = getWebsiteById(id); return w ? w.Website
 
 function showLogin() {
   $('#loginView').classList.remove('hidden');
-  $('#appView').classList.add('hidden');
+  $('#app').classList.add('hidden'); 
   const pw = $('#loginPassword'); if (pw) pw.value = '';
   const em = $('#loginEmail'); if (em && APP.user) em.value = APP.user.email || '';
 }
 
 function showApp() {
   $('#loginView').classList.add('hidden');
-  $('#appView').classList.remove('hidden');
+  $('#app').classList.remove('hidden');
   updateUserUI();
   buildNav();
   updateTopbar();
@@ -822,9 +822,7 @@ const v = APP.view;
   }
   area.innerHTML = `<div class="empty-state"><div class="empty-icon"><i class="fa-solid fa-circle-info"></i></div><h3>Coming soon</h3></div>`;
 
-  area.classList.remove('fade-in');
-void area.offsetWidth; // force reflow
-area.classList.add('fade-in');
+
 }
 
 /* ============================================================
