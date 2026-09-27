@@ -1,4 +1,4 @@
-const CACHE = 'ci-crm-v9';
+const CACHE = 'ci-crm-v10';
 const SHELL = [
   './', './index.html', './app.js', './gas-api.js',
   './manifest.json', './icon-180.png', './icon-192.png', './icon-512.png'
