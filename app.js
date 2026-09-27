@@ -809,20 +809,33 @@ function go(view, subview) {
 }
 
 function renderView() {
-if (!area) return;
-area.innerHTML = '';  // reset
-const v = APP.view;
-  if (v === 'dashboard') { area.innerHTML = renderDashboard(); mountDashboard(); return; }
-  if (v === 'reports')   { area.innerHTML = renderReports();   mountReports();   return; }
-  if (v === 'settings')  { area.innerHTML = renderSettings();  return; }
-  if (MODULES[v] && MODULES[v].sheet) {
-    area.innerHTML = renderModuleShell(v);
-    renderModuleBody(v);
+  const area = $('#viewArea');
+  if (!area) {
+    console.error('❌ #viewArea element not found in DOM');
     return;
   }
-  area.innerHTML = `<div class="empty-state"><div class="empty-icon"><i class="fa-solid fa-circle-info"></i></div><h3>Coming soon</h3></div>`;
-
-
+  try {
+    const v = APP.view;
+    if (v === 'dashboard') { area.innerHTML = renderDashboard(); mountDashboard(); return; }
+    if (v === 'reports')   { area.innerHTML = renderReports();   mountReports();   return; }
+    if (v === 'settings')  { area.innerHTML = renderSettings();  return; }
+    if (MODULES[v] && MODULES[v].sheet) {
+      area.innerHTML = renderModuleShell(v);
+      renderModuleBody(v);
+      return;
+    }
+    area.innerHTML = `<div class="empty-state"><div class="empty-icon"><i class="fa-solid fa-circle-info"></i></div><h3>Coming soon</h3></div>`;
+  } catch (err) {
+    console.error('❌ renderView failed:', err);
+    area.innerHTML = `<div class="empty-state" style="padding:40px">
+      <div class="empty-icon" style="background:var(--danger-soft);color:var(--danger)">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <h3>Render error</h3>
+      <p class="text-sm text-mute">${esc(err.message)}</p>
+      <button class="btn btn-primary" onclick="location.reload()"><i class="fa-solid fa-rotate"></i> Reload</button>
+    </div>`;
+  }
 }
 
 /* ============================================================
