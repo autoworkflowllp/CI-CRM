@@ -1,4 +1,4 @@
-/* Chaitanya Impex CRM — GAS JSONP API client (COMPLETE FIX) */
+/* Chaitanya Impex CRM — GAS JSONP API Client (FIXED) */
 
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbwPKol-u_CEg3dPUl2OigmqHCxq8d9Cg2NnC5BnVaKDtoAdlaTAxFRcMysjDs82JGgg_Q/exec';
 
@@ -35,7 +35,7 @@ function apiCall(action, data, onSuccess, onError) {
   };
 
   script.id = '_s_' + cb;
-  script.onerror = () => { cleanup(); onError && onError({ error: 'Network error - backend unreachable' }); };
+  script.onerror = () => { cleanup(); onError && onError({ error: 'Network error — backend unreachable' }); };
 
   const payload = encodeURIComponent(JSON.stringify({
     action: action,
@@ -52,7 +52,7 @@ function apiPromise(action, data) {
   return new Promise((resolve, reject) => apiCall(action, data, resolve, reject));
 }
 
-/* ---------- The API object app.js expects ---------- */
+/* ---------- API OBJECT (yeh app.js expect karta hai) ---------- */
 const API = {
   login(email, password)        { return apiPromise('login', { email, password }); },
   logout()                      { return apiPromise('logout', {}).finally(clearSession); },
