@@ -1134,8 +1134,15 @@ function getAvailableViews(module) {
 
 function switchSubview(v) {
   APP.subview = v;
+  APP.page = 1;
   renderModuleBody(APP.view);
-  $$('.view-tab').forEach(el => el.classList.toggle('active', el.textContent.includes(VIEW_TYPES[v].label)));
+  $$('.view-tab').forEach(el => {
+    const label = VIEW_TYPES[v]?.label || '';
+    el.classList.toggle('active', el.textContent.includes(label));
+  });
+  /* force scroll reset */
+  const body = $('#moduleBody');
+  if (body) body.scrollTop = 0;
 }
 
 function onModuleSearch(module, q) {
