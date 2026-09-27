@@ -608,7 +608,12 @@ function filterMenu(q) {
   });
 }
 
-function toggleSidebar() { $('#sidebar').classList.toggle('open'); }
+function toggleSidebar() {
+  const sb = $('#sidebar');
+  const bd = $('#sidebarBackdrop');
+  const isOpen = sb.classList.toggle('open');
+  if (bd) bd.classList.toggle('active', isOpen);
+}
 
 function setActiveNav() {
   $$('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.key === APP.view));
@@ -796,13 +801,17 @@ function go(view, subview) {
   setActiveNav();
   updateTopbar();
   renderView();
-  if (window.innerWidth < 900) $('#sidebar').classList.remove('open');
+ if (window.innerWidth < 900) {
+  $('#sidebar').classList.remove('open');
+  const bd = $('#sidebarBackdrop');
+  if (bd) bd.classList.remove('active');
+}
 }
 
 function renderView() {
-  const area = $('#viewArea');
-  if (!area) return;
-  const v = APP.view;
+if (!area) return;
+area.innerHTML = '';  // reset
+const v = APP.view;
   if (v === 'dashboard') { area.innerHTML = renderDashboard(); mountDashboard(); return; }
   if (v === 'reports')   { area.innerHTML = renderReports();   mountReports();   return; }
   if (v === 'settings')  { area.innerHTML = renderSettings();  return; }
@@ -812,6 +821,10 @@ function renderView() {
     return;
   }
   area.innerHTML = `<div class="empty-state"><div class="empty-icon"><i class="fa-solid fa-circle-info"></i></div><h3>Coming soon</h3></div>`;
+
+  area.classList.remove('fade-in');
+void area.offsetWidth; // force reflow
+area.classList.add('fade-in');
 }
 
 /* ============================================================
